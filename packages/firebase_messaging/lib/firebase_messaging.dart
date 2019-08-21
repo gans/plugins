@@ -114,6 +114,14 @@ class FirebaseMessaging {
     await _channel.invokeMethod<void>('setAutoInitEnabled', enabled);
   }
 
+  Future<bool> canRequestPermissions() async {
+    return await _channel.invokeMethod('canRequestPermissions');
+  }
+
+  Future<void> requestPermissions() async {
+    await _channel.invokeMethod('requestPermissions');
+  }
+
   Future<dynamic> _handleMethod(MethodCall call) async {
     switch (call.method) {
       case "onToken":

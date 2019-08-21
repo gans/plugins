@@ -122,6 +122,20 @@ static FlutterError *getFlutterError(NSError *error) {
     NSNumber *value = call.arguments;
     [FIRMessaging messaging].autoInitEnabled = value.boolValue;
     result(nil);
+  } else if ([@"requestPermissions" isEqualToString:method]) {
+    BOOL canOpenSettings = (&UIApplicationOpenSettingsURLString != NULL);
+    if (canOpenSettings) {
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    result(nil);
+  } else if ([@"canRequestPermissions" isEqualToString:method]) {
+    BOOL canOpenSettings = (&UIApplicationOpenSettingsURLString != NULL);
+    if (canOpenSettings) {
+        result([NSNumber numberWithBool:YES]);
+    } else {
+        result([NSNumber numberWithBool:NO]);
+    }
   } else {
     result(FlutterMethodNotImplemented);
   }

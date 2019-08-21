@@ -208,6 +208,10 @@ public class FirebaseMessagingPlugin extends BroadcastReceiver
       Boolean isEnabled = (Boolean) call.arguments();
       FirebaseMessaging.getInstance().setAutoInitEnabled(isEnabled);
       result.success(null);
+    } else if ("canRequestPermissions".equals(call.method)) {
+      result.success(null);
+    } else if ("requestPermissions".equals(call.method)) {
+      result.success(null);
     } else {
       result.notImplemented();
     }
